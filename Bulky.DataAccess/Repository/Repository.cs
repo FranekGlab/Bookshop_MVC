@@ -25,7 +25,7 @@ namespace Bulky.DataAccess.Repository
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter)
+        public T get(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = dbSet;
             query = query.Where(filter);
