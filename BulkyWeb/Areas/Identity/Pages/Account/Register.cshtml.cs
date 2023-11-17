@@ -120,7 +120,7 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
             public string? State { get; set; }
             public string? PostalCode { get; set; }
             public string? PhoneNumber { get; set; }
-            public int? CompanyId { get; set; }
+            public string? CompanyId { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> CompanyList { get; set; }
         }
@@ -169,10 +169,11 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                 user.State = Input.State;
                 user.PostalCode = Input.PostalCode;
                 user.PhoneNumber = Input.PhoneNumber;
-
+                //tutaj musze sprawdzic czy w bazie jest nazwa company ktore zostalo podane
                 if (Input.Role == SD.Role_Company)
+                    // jesli company istnieje
                 {
-                    user.CompanyId=Input.CompanyId;
+                  //  user.CompanyId=user.CompanyId;
                 }
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
