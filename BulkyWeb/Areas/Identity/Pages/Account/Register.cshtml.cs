@@ -169,9 +169,8 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                 user.State = Input.State;
                 user.PostalCode = Input.PostalCode;
                 user.PhoneNumber = Input.PhoneNumber;
-                //tutaj musze sprawdzic czy w bazie jest nazwa company ktore zostalo podane
                 if (Input.Role == SD.Role_Company)
-                    // jesli company istnieje
+
                 {
                   //  user.CompanyId=user.CompanyId;
                 }
