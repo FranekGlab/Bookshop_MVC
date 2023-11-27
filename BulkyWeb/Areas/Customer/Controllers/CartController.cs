@@ -132,7 +132,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
 
             }
 
-            if (applicationUser.CompanyId.GetValueOrDefault() == 0)
+            if (applicationUser.CompanyId.GetValueOrDefault() == 0 || applicationUser.CompanyId is not null)
             {
                 //it is a regular customer acc
                 //stripe logic
