@@ -152,15 +152,16 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            if (ModelState.IsValid)
 
+            if (ModelState.IsValid)
             {
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                // Ustawienie dodatkowych właściwości użytkownika
                 user.StreetAddress = Input.StreetAddress;
                 user.City = Input.City;
                 user.Name = Input.Name;
@@ -168,7 +169,6 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                 user.PostalCode = Input.PostalCode;
                 user.PhoneNumber = Input.PhoneNumber;
                 if (Input.Role == SD.Role_Company)
-
                 {
                     user.CompanyId = Input.CompanyId;
                 }
@@ -197,7 +197,10 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    // Wysyłanie e-maila
+                    await _emailSender.SendEmailAsync(
+                        Input.Email,
+                        "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
@@ -223,9 +226,10 @@ namespace BulkyWeb.Areas.Identity.Pages.Account
                 }
             }
 
-                // If we got this far, something failed, redisplay form
-                return Page();
+            // If we got this far, something failed, redisplay form
+            return Page();
         }
+
 
         private ApplicationUser CreateUser()
         {
