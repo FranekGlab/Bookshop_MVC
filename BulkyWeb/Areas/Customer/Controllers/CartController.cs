@@ -136,7 +136,7 @@ namespace BulkyWeb.Areas.Customer.Controllers
             {
                 //it is a regular customer acc
                 //stripe logic
-                var domain = "https://localhost:7001/";
+                var domain = Request.Scheme+ "://"+ Request.Host.Value+ "/";
                 var options = new SessionCreateOptions
                 {
                     SuccessUrl = domain+ $"customer/cart/OrderConfirmation?id={ShoppingCartVM.OrderHeader.Id}",
