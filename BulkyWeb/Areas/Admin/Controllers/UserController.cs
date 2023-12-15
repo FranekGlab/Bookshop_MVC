@@ -45,8 +45,8 @@ namespace BulkyWeb.Areas.Admin.Controllers
             };
 
 
-
-            return View();
+            RoleVM.ApplicationUser.Role = _db.Roles.FirstOrDefault(u => u.Id == RoleID).Name;
+            return View(RoleVM);
         }
 
 
