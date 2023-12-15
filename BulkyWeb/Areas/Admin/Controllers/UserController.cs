@@ -140,7 +140,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             _unitOfWork.ApplicationUser.Update(objFromDb);
             _unitOfWork.Save();
 
-            return Json(new { success = true, message = "Operation Successful" });
+            return Json(new { success = true, message = "Operation Successful"});
         }
 
         #endregion
